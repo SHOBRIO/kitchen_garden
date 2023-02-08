@@ -1,8 +1,4 @@
-# kitchen_garden
-
-画面遷移図
-Figma URL: https://www.figma.com/file/iBoaT72sjtjTX0SSnTpUxZ/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0%3A1&t=MZPEdEQ8v5MqMEAd-1
-
+# README
 
 子どもが小さいときのお出かけ先に困っている家族へ
 1つの鉢植えからシェアワークまで、健康とおいしい体験を生み出す
