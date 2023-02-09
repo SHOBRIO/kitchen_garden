@@ -10,7 +10,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       TZ: Asia/Tokyo
     ports:
-      - "3306:3306"
+      - "4306:3306"
     volumes:
       - ./db/mysql/volumes:/var/lib/mysql
 
