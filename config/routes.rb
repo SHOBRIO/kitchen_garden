@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'static_pages/top'
+  root to: 'static_pages#top'
+  
   get "posts/index"
-  root "posts#index"
-
+  
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"

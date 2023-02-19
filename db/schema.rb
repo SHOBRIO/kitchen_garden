@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_155334) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_19_113524) do
   create_table "diaries", charset: "utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -23,6 +23,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_155334) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "crypted_password"
+    t.string "salt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

@@ -11,9 +11,13 @@
   </head>
   
   <body>
+    <%= render 'shared/header' %>
+    
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
+
+    <%= render 'shared/footer' %>
     
     <script src="https://cdn.jsdelivr.net/npm/preline@1.7.0/dist/preline.min.js"></script>
   </body>
