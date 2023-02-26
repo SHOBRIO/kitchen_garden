@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
-  get 'user_sessions/new'
-  get 'user_sessions/create'
-  get 'user_sessions/destroy'
   get 'static_pages/top'
   root to: 'static_pages#top'
   
   get "posts/index"
-  
-  get "login", to: "sessions#new"
-  post "login", to: "sessions#create"
-  delete "logout", to: "sessions#destroy"
+
+  get "login", to: "user_sessions#new"
+  post "login", to: "user_sessions#create"
+  delete "logout", to: "user_sessions#destroy"
 
   get "signup", to: "users#new"
   post "signup", to: "users#create"

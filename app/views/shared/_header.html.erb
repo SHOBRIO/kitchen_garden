@@ -1,5 +1,5 @@
 <!-- Navigation Toggle -->
-<header class="sticky mx-auto top-0 p-1 bg-green-400 bg-opacity-95">
+<header class="sticky z-50 mx-auto top-0 p-1 bg-green-400">
   <div class="flex justify-between">
     <button
       type="button"
@@ -25,7 +25,7 @@
     </button>
     <!-- End Navigation Toggle -->
     <span class="ml-12 m-3">
-      <a href="#">KitchenGarden</a>
+      <%= link_to 'KitchenGarden', root_path %>
     </span>
     <% if logged_in? %>
     <!-- アカウント管理 -->
@@ -94,7 +94,7 @@
   </div>
   <% else %>
   <div class="m-3 text-sm">
-    <a href="#">ログイン</a>
+    <%= link_to 'ログイン', login_path %>
   </div>
   <% end %>
 
