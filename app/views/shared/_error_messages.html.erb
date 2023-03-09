@@ -1,8 +1,8 @@
 <% if object.errors.any? %>
-<div class="bg-orange-100" role="alert">
+<div class="border-2" role="alert">
   <ul>
     <% object.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+      <li class="m-3 bg-red-100"><%= msg %></li>
     <% end %>
   </ul>
 </div>
