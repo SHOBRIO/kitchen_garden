@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_19_113524) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_110930) do
   create_table "diaries", charset: "utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -18,13 +18,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_19_113524) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "profiles", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
-    t.string "crypted_password"
-    t.string "salt"
+    t.string "crypted_password", default: "", null: false
+    t.string "salt", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "profiles", "users"
 end

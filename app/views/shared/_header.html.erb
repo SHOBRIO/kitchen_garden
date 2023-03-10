@@ -63,15 +63,10 @@
         </button>
 
         <div
-          class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 bg-white shadow-md rounded-lg p-2 mt-2 min-w-[10rem] dark:bg-gray-800 dark:border dark:border-gray-700"
+          class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 bg-white shadow-md rounded-lg p-2 mt-2 min-w-[9rem] dark:bg-gray-800 dark:border dark:border-gray-700"
           aria-labelledby="hs-dropdown-custom-trigger"
         >
-          <a
-            class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-            href="#"
-          >
-            プロフィール
-          </a>
+          <%= link_to 'プロフィール', mypage_profile_path, class: 'class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300' %>
           
           <%= form_with url: logout_path, method: :delete do %>
             <%= submit_tag "ログアウト", class: "flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
