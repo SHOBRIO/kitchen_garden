@@ -1,4 +1,4 @@
-class DiariesController < ApplicationController
+class Mypage::DiariesController < ApplicationController
   before_action :set_diary, only: %i[ show edit update destroy ]
 
   # GET /diaries or /diaries.json
