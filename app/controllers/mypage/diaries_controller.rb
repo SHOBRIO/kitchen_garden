@@ -9,7 +9,7 @@ class Mypage::DiariesController < ApplicationController
   # GET /diaries/1 or /diaries/1.json
   def show
   end
-
+  
   # GET /diaries/new
   def new
     @diary = Diary.new
@@ -21,11 +21,13 @@ class Mypage::DiariesController < ApplicationController
 
   # POST /diaries or /diaries.json
   def create
+    @kitchen_garden = current_user.kitchen_garden
     @diary = Diary.new(diary_params)
+    @diary.kitchen_garden_id = @kitchen_garden.id
 
     respond_to do |format|
       if @diary.save
-        format.html { redirect_to diary_url(@diary), notice: "Diary was successfully created." }
+        format.html { redirect_to mypage_diary_url(@diary), notice: "Diary was successfully created." }
         format.json { render :show, status: :created, location: @diary }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +54,7 @@ class Mypage::DiariesController < ApplicationController
     @diary.destroy
 
     respond_to do |format|
-      format.html { redirect_to diaries_url, notice: "Diary was successfully destroyed." }
+      format.html { redirect_to mypage_diaries_url, notice: "Diary was successfully destroyed." }
       format.json { head :no_content }
     end
   end

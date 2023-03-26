@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       resource :seedling_day, only: %i[update] #芽が出た日
       resource :planting_day, only: %i[update] #苗を植え替えた日
     end
-    resources :diaries, only: %i[index show new create update destroy] #日誌
+    resources :diaries, only: %i[index show new edit create update destroy] #日誌
     resources :notifications, only: %i[index] #通知
     resource :notification_setting, only: %i[show update] #通知設定
     resource :profile, only: %i[show update] do

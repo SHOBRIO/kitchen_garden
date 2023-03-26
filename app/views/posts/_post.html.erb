@@ -1,0 +1,13 @@
+<li id="<%= dom_id(post) %>">
+    <div>
+      <div><%= link_to post.content, post_path(post) %></div>
+      posted by <%= post.user.id %>
+  
+    </div>
+    <div class="d-flex">
+      <div class="ms-auto">
+        <%= l post.created_at, format: :long %>
+      </div>
+    </div>
+    <hr>
+  </li>

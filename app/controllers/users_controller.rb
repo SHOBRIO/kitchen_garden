@@ -5,16 +5,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to login_path
-      flash[:notice] = 'ユーザーの作成に成功しました'
-    else
-      flash.now[:alert] = 'ユーザーの作成に失敗しました'
-      render :new
+    ActiveRecord::Base.transaction do
+      @user = User.new(user_params)
+      @user.save!
+      @kitchen_garden = @user.build_kitchen_garden
+      @kitchen_garden.save!
     end
+    redirect_to login_path
+    flash[:notice] = 'ユーザーの作成に成功しました'
+  rescue ActiveRecord::RecordInvalid => e
+    flash.now[:alert] = 'ユーザーの作成に失敗しました'
+    render :new
   end
-  
+    
   private
 
   def user_params

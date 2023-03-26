@@ -1,7 +1,9 @@
-<h1>Posts</h1>
-
-<% @posts.each do |post| %>
-  <p><%= post.content %></p>
-<% end %>
-
-<%= link_to "New Post", new_post_path %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <ul class="list-unstyled">
+        <%= render @posts %>
+      </ul>
+    </div>
+  </div>
+</div>

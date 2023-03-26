@@ -19,12 +19,13 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   def destroy
     @post = current_user.posts.find(params[:id])
     @post.destroy!
-    redirect_to posts_path, success: "ポストを削除しました"
+    redirect_to posts_path, flash: { success: "ポストを削除しました" }
   end
 
   private
