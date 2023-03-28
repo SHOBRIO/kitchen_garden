@@ -30,7 +30,6 @@ Rails.application.routes.draw do
   end
 
   namespace :mypage do
-    root "kitchen_gardens#show"
     resources :kitchen_gardens, only: %i[show] #マイページトップ（野菜管理画面）
     resources :growing_vegetables, only: %i[show update destroy] do # 野菜詳細
       resource :sowing_day, only: %i[update] #種まき日
