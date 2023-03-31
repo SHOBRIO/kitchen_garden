@@ -55,6 +55,9 @@ gem 'oauth'
 gem 'oauth2'
 gem 'sorcery'
 
+#カレンダーはこっちを使う
+gem 'simple_calendar'
+
 #Fullcalendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
