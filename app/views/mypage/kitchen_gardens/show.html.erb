@@ -3,9 +3,5 @@
   <p>Find me in app/views/mypage/kitchen_gardens/show.html.erb</p>
   <%= @kitchen_garden.id %>
 
-
+  <%= render "simple_calendar/month_calendar" %>
 </div>
-
-<%= week_calendar(number_of_weeks: 2) do |date| %>
-  <%= date %>
-<% end %>
