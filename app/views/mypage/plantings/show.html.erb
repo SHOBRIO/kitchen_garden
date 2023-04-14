@@ -17,13 +17,3 @@
         </div>
     </div>
 </div>
-
-<%= form_with(model: @guide, local: true, multipart: true) do |form| %>
-  <!-- 省略 -->
-  <div class="field">
-    <%= form.label :photo %>
-    <%= form.file_field :photo %>
-  </div>
-  <%= form.submit %>
-  <!-- 省略 -->
-<% end %>

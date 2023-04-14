@@ -1,4 +1,4 @@
 class Guide < ApplicationRecord
   belongs_to :vegetable
-  has_one_attached :photo
+  has_one_attached :image
 end
