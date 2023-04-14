@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   namespace :mypage do
     resources :kitchen_gardens, only: %i[show] #マイページトップ（野菜管理画面）
-    resources :growing_vegetables, only: %i[show update destroy] do # 野菜詳細
+    resources :plantings, only: %i[show update destroy] do # 野菜詳細
       resource :sowing_day, only: %i[update] #種まき日
       resource :seedling_day, only: %i[update] #芽が出た日
       resource :planting_day, only: %i[update] #苗を植え替えた日

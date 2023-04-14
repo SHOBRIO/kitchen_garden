@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_24_104655) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_13_111157) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,11 +58,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_104655) do
     t.index ["kitchen_garden_id"], name: "index_diaries_on_kitchen_garden_id"
   end
 
+  create_table "guides", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "difficulty"
+    t.string "sowing_month"
+    t.string "planting_month"
+    t.string "harvesting_month"
+    t.bigint "vegetable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vegetable_id"], name: "index_guides_on_vegetable_id"
+  end
+
   create_table "kitchen_gardens", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_kitchen_gardens_on_user_id"
+  end
+
+  create_table "plantings", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "kitchen_garden_id", null: false
+    t.bigint "vegetable_id", null: false
+    t.boolean "publish", default: false, null: false
+    t.date "sowing_date"
+    t.date "germination_date"
+    t.date "seedling_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kitchen_garden_id"], name: "index_plantings_on_kitchen_garden_id"
+    t.index ["vegetable_id"], name: "index_plantings_on_vegetable_id"
   end
 
   create_table "posts", charset: "utf8mb4", force: :cascade do |t|
@@ -90,12 +114,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_104655) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "vegetables", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "diaries", "kitchen_gardens"
+  add_foreign_key "guides", "vegetables"
   add_foreign_key "kitchen_gardens", "users"
+  add_foreign_key "plantings", "kitchen_gardens"
+  add_foreign_key "plantings", "vegetables"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
 end
