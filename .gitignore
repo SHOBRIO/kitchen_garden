@@ -12,6 +12,9 @@
 .memo
 .keep
 
+# Ignore DS_Store.
+.DS_Store
+
 #Docker volums.
 /db/mysql/volumes
 

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  has_one :profile
   has_many :posts
   has_many :comments
   has_one :kitchen_garden
@@ -13,4 +14,9 @@ class User < ApplicationRecord
   def mine?(object)
     id == object.user_id
   end
+
+  def profile
+    super || build_profile
+  end
+
 end
