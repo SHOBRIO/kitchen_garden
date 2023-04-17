@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
   resources :relationships, only: %i[create destroy] #フォロー
   resources :likes, only: %i[:create, :destroy] #いいね
-  resource :growing_vegetable_search, only: %i[show new create] #育てる野菜の検索
+  resources :planting_vegetable_searches, only: %i[index show new create], param: :vegetable_id #育てる野菜の検索
 
   resources :posts do
     collection do
@@ -43,10 +43,7 @@ Rails.application.routes.draw do
       resource :avatar, only: %i[destroy], module: :profiles #profile/avatar/DELETE
     end
   end
-
   resources :password_resets, only: %i[new create edit update] #リセットパスワード
 
-  #test
-  resources :diaries
-
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 end

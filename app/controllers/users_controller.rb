@@ -8,8 +8,13 @@ class UsersController < ApplicationController
     ActiveRecord::Base.transaction do
       @user = User.new(user_params)
       @user.save!
+
       @kitchen_garden = @user.build_kitchen_garden
       @kitchen_garden.save!
+
+      @profile = @user.build_profile
+      @profile.save!
+
     end
     redirect_to login_path
     flash[:notice] = 'ユーザーの作成に成功しました'

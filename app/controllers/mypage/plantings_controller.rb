@@ -9,6 +9,12 @@ class Mypage::PlantingsController < ApplicationController
     @planting.update(planting_params)
     redirect_to mypage_planting_path(@planting)
   end
+
+  def destroy
+    @planting = current_user.kitchen_garden.plantings.find(params[:id])
+    @planting.destroy
+    redirect_to mypage_kitchen_garden_path(current_user.kitchen_garden)
+  end
   
   private
     def planting_params

@@ -1,8 +1,7 @@
 <div class="wrapper mx-auto m-12">
   <div class="text-center mb-12">
-    <a href="#" class="py-3 px-4 gap-2 rounded-md border-2 border-green-200 font-semibold text-green-500 hover:text-white hover:bg-green-500 hover:border-green-500 transition-all text-sm">
-      あなたの家にぴったりな野菜をさがしてみる
-    </a>
+    <%= link_to 'あなたの家にぴったりな野菜をさがしてみる', planting_vegetable_searches_path, class: 'py-3 px-4 gap-2 rounded-md border-2 border-green-200 font-semibold text-green-500 hover:text-white hover:bg-green-500 hover:border-green-500 transition-all text-sm'
+    %>
   </div>
   <div class="ml-6 w-600 flex justify-center items-center">
     <%= image_tag('vegetable.png') %>

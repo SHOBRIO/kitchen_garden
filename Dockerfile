@@ -9,6 +9,8 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
 RUN mkdir /myapp
 WORKDIR /myapp
 
+ENV TZ Asia/Tokyo
+
 RUN gem install bundler:2.3.26
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock

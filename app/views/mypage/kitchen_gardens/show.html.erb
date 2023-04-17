@@ -4,8 +4,8 @@
       <%= date %>
     <% end %>
     <div class="planting-container mt-6">
-      <div class="text-center">
-        選んだやさい
+      <div class="text-center text-green-500 text-lg font-bold">
+        選んだ野菜
       </div>
       <div class="flex flex-wrap">
         <% @plantings.each do |planting| %>
@@ -15,6 +15,9 @@
           </div>
         </div>
         <% end %>
+        <div class="w-full text-center m-3">
+          <%= link_to "＋",planting_vegetable_searches_path, class: "btn-primary bg-green-500 rounded-lg p-3 font-bold" %>
+        </div>
       </div>
     </div>
   </div>
