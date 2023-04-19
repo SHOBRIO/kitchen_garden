@@ -19,11 +19,27 @@
         <tr style="height: 100px; vertical-align: top;">
           <% week.each do |day| %>
             <%= content_tag :td, class: 'calendar.td_classes_for(day) border' do %>
-              <%= day.day %>
-              <% if day == Date.today %>
-                <span class="today">Today</span>
-              <% end %>
-
+              <div>
+                <ul class="list-disc list-inside">
+                  <li><%= day.day %></li>
+                  <% if day == Date.today %>
+                    <li>Today</li>
+                  <% end %>
+                  <% if @plantings.present? %>
+                    <% @plantings.each do |planting| %>
+                      <% if day == planting.sowing_date %>
+                        <li><%= planting.vegetable.name %>の種まきをした日</li>
+                      <% end %>
+                      <% if day == planting.germination_date %>
+                        <li><%= planting.vegetable.name %>の芽が出た日</li>
+                      <% end %>
+                      <% if day == planting.seedling_date %>
+                        <li><%= planting.vegetable.name %>の苗を植えた日</li>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </div>
             <% end %>
           <% end %>
         </tr>

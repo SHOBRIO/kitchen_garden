@@ -18,6 +18,6 @@ class Mypage::PlantingsController < ApplicationController
   
   private
     def planting_params
-      params.require(:planting).permit(:publish, :sowing_date, :germination_dare, :seedling_date, :image)
+      params.require(:planting).permit(:publish, :sowing_date, :germination_date, :seedling_date, :image)
     end
 end
