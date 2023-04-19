@@ -19,8 +19,8 @@
         <tr style="height: 100px; vertical-align: top;">
           <% week.each do |day| %>
             <%= content_tag :td, class: 'calendar.td_classes_for(day) border' do %>
-              <div>
-                <ul class="list-disc list-inside">
+              <div style="overflow-x: scroll;">
+                <ul class="list-disc list-inside" style="white-space: nowrap;">
                   <li><%= day.day %></li>
                   <% if day == Date.today %>
                     <li>Today</li>
@@ -47,3 +47,4 @@
     </tbody>
   </table>
 </div>
+
