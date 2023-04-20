@@ -13,6 +13,7 @@ class Mypage::DiariesController < ApplicationController
   # GET /diaries/new
   def new
     @diary = Diary.new
+    @date = params[:date] ? Date.parse(params[:date]) : Time.zone.now
   end
 
   # GET /diaries/1/edit

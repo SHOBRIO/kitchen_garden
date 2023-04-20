@@ -23,7 +23,7 @@
                 <ul class="list-disc list-inside" style="white-space: nowrap;">
                   <li>
                     <% diary = current_user.kitchen_garden.diaries.find_by(created_at: day.beginning_of_day..day.end_of_day) %>
-                    <%= link_to "#{day.day}#{diary ? '📕' : ''}", diary ? mypage_diary_path(diary) : new_mypage_diary_path(date: day), class: 'diary-link' %>                    
+                    <%= link_to "#{day.day}#{diary ? '📕' : ''}", diary ? mypage_diary_path(diary) : new_mypage_diary_path(date: day) %>                    
                   </li>
                   <% if day == Date.today %>
                     <li>Today</li>
