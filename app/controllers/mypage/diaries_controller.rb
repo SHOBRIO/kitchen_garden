@@ -3,7 +3,7 @@ class Mypage::DiariesController < ApplicationController
 
   # GET /diaries or /diaries.json
   def index
-    @diaries = Diary.all
+    @diaries = Diary.order(created_at: :desc)
   end
 
   # GET /diaries/1 or /diaries/1.json
@@ -30,6 +30,8 @@ class Mypage::DiariesController < ApplicationController
       if @diary.save
         format.html { redirect_to mypage_diary_url(@diary), notice: "Diary was successfully created." }
         format.json { render :show, status: :created, location: @diary }
+        post = current_user.posts.new(content: "#{current_user.profile.name}が日誌を新たに作成しました。")
+        post.save
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @diary.errors, status: :unprocessable_entity }

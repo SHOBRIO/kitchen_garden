@@ -2,14 +2,14 @@
 <header class="sticky z-50 top-0 p-1 bg-green-400">
   <div class="flex">
     <div
-      class="text-gray-500 hover:text-gray-600 w-1/3"
+      class="text-gray-500 hover:text-gray-600 hover:bg-green-100 w-1/3"
     >
       <!-- sr-onlyは非表示にするため -->
       <span class="sr-only">Toggle Navigation</span>
       <svg
-        class="w-1/3 border border-gray-300 rounded-md p-2"
+        class="w-1/3 border border-gray-300 rounded-md p-2 items-center"
         width="0"
-        height="42"
+        height="50"
         fill="currentColor"
         viewBox="0 0 15 15"
         data-hs-overlay="#docs-sidebar"
@@ -23,9 +23,19 @@
       </svg>
     </div>
     <!-- End Navigation Toggle -->
+    
     <div class="ml-auto w-1/3 inline-flex justify-center items-center">
-      <%= link_to 'KitchenGarden', root_path %>
+      <% if logged_in? %>
+        <%= link_to mypage_kitchen_garden_path(current_user), class: "border-2 px-5 py-2 rounded-lg bg-green-500 text-white text-center text-sm font-bold" do %>
+          🥬 うちのお野菜 🍅
+        <% end %>
+      <% else %>
+        <%= link_to root_path, class: "border-2 px-5 py-2 rounded-lg bg-green-500 text-white text-center text-sm font-bold" do %>
+          🥬 うちのお野菜 🍅
+        <% end %>
+      <% end %>
     </div>
+
     <% if logged_in? %>
     <div class="ml-auto w-1/3 inline-flex justify-end items-center">
     <!-- アカウント管理 -->
@@ -36,14 +46,10 @@
           class="hs-dropdown-toggle py-1 pl-1 pr-3 inline-flex justify-center items-center gap-2 rounded-full border font-medium bg-green-400 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-white focus:bg-base-100 focus:ring-green-400 transition-all text-sm dark:bg-gray-800 dark:hover:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
         >
           <% if current_user.profile.avatar.attached? %>
-            <%= image_tag current_user.avatar, class: "w-8 h-auto rounded-full" %>
+            <%= image_tag current_user.profile.avatar, class: "w-8 h-auto rounded-full" %>
           <% else %>
             <%= image_tag 'no_image_square.jpg', class: "w-8 h-auto rounded-full" %>
           <% end %>
-          <span
-            class="text-gray-600 font-medium truncate max-w-[7.5rem] dark:text-gray-400"
-            ><%= current_user.profile.name %></span 
-          >
           <svg
             class="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600"
             width="16"
@@ -62,22 +68,23 @@
         </button>
 
         <div
-          class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 bg-white shadow-md rounded-lg p-2 mt-2 min-w-[9rem] dark:bg-gray-800 dark:border dark:border-gray-700"
+          class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2 min-w-[9rem] dark:bg-gray-800 dark:border dark:border-gray-700"
           aria-labelledby="hs-dropdown-custom-trigger"
-        >
-          <%= link_to 'プロフィール', mypage_profile_path, class: 'class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300' %>
-          
+        > 
+          <span class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-green-500 font-bold">
+            <%= current_user.profile.name %>
+          </span>
+          <hr />
+          <%= link_to 'プロフィール', mypage_profile_path, class: "flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" %>
           <%= form_with url: logout_path, method: :delete do %>
-            <%= submit_tag "ログアウト", class: "flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-            %>
+            <%= submit_tag "ログアウト", class: "flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" %>
           <% end %>
-          
         </div>
       </div>
     </div>
     <% else %>
     <div class="ml-auto w-1/3 inline-flex justify-end items-center text-sm p-3">
-      <%= link_to 'Login', login_path %>
+      <%= link_to 'ログイン', login_path, class: 'text-gray-700' %>
     </div>
     <% end %>
   </div>
@@ -117,98 +124,122 @@
           </a>
         </li>
 
-        <li class="hs-accordion" id="bu-account-accordion">
-          <a
-            class="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white"
-            href="javascript:;"
-          >
-            <svg
-              class="w-3.5 h-3.5"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
+        <% if current_user %>
+          <li class="hs-accordion" id="bu-account-accordion">
+            <a
+              class="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white"
+              href="javascript:;"
             >
-              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-              <path
-                fill-rule="evenodd"
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-              />
-            </svg>
-            マイページ
+              <svg
+                class="w-3.5 h-3.5"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                <path
+                  fill-rule="evenodd"
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                />
+              </svg>
+              マイページ
 
-            <svg
-              class="hs-accordion-active:block ml-auto hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              <svg
+                class="hs-accordion-active:block ml-auto hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+
+              <svg
+                class="hs-accordion-active:hidden ml-auto block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </a>
+
+            <div
+              id="bu-account-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
             >
-              <path
-                d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              ></path>
-            </svg>
+              <ul class="pt-2 pl-2">
+                <li>
+                  <a
+                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/mypage/kitchen_gardens/:id(.:format)"
+                  >
+                    家庭菜園
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/mypage/diaries"
+                  >
+                    日誌
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="javascript:;"
+                  >
+                    お知らせ（実装中）
+                  </a>
+                </li>
 
-            <svg
-              class="hs-accordion-active:hidden ml-auto block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              ></path>
-            </svg>
-          </a>
-
-          <div
-            id="bu-account-accordion"
-            class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-          >
-            <ul class="pt-2 pl-2">
-              <li>
-                <a
-                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300"
-                  href="/mypage/kitchen_gardens/:id(.:format)"
+              </ul>
+            </div>
+          </li>
+          
+          <ul class="space-y-1.5">
+            <li>
+              <a
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white"
+              href="/posts/new"
+              >
+                <svg
+                fill="none"
+                stroke="currentColor" 
+                stroke-width="1.5" 
+                viewBox="0 0 22 22" 
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                class="h-3.5 w-3.5 [color]-$fill-color"
+                style="stroke-width: var(--grid-item-icon-stroke-width); transform: scale(var(--grid-item-icon-scale));"
                 >
-                  家庭菜園
-                </a>
-              </li>
-              <li>
-                <a
-                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300"
-                  href="/mypage/diaries"
-                >
-                  日誌
-                </a>
-              </li>
-              <li>
-                <a
-                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300"
-                  href="javascript:;"
-                >
-                  お知らせ（実装中）
-                </a>
-              </li>
-
-            </ul>
-          </div>
-        </li>
-
-        <ul class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
-          <%= link_to '投稿する', new_post_path %>
-        </ul>
-      </ul>
+                  <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+                  >
+                  </path>
+                </svg>
+                つぶやきの投稿
+              </a>
+            </li>
+          </ul>
+        <% end %>
     </nav>
   </div>
 </header>

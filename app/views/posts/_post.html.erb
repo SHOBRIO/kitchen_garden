@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="md:w-1/5 text-right text-gray-500 text-sm flex justify-end">
-      <%= l post.created_at, format: :long %>
+      <%= post.created_at.strftime('%Y年%m月%d日%H:%M') %>
     </div>
   </div>
 </li>

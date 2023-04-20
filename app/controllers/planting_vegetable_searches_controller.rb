@@ -14,8 +14,16 @@ class PlantingVegetableSearchesController < ApplicationController
   end
 
   def create
-    @planting = Planting.new(vegetable_id: params[:vegetable_id], kitchen_garden_id: current_user.kitchen_garden.id)
-    @planting.save
-    redirect_to mypage_kitchen_garden_path(current_user.kitchen_garden), notice: "野菜を追加しました"
+    if user_signed_in?
+      @planting = Planting.new(vegetable_id: params[:vegetable_id], kitchen_garden_id: current_user.kitchen_garden.id)
+      @planting.save
+      redirect_to mypage_kitchen_garden_path(current_user.kitchen_garden), notice: "野菜を追加しました"
+    else
+      redirect_to login_path, notice: "この機能を使うにはログインが必要です"
+    end
+  end
+
+  def user_signed_in?
+    !current_user.nil?
   end
 end
