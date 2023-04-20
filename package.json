@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "daisyui": "^2.50.0",
+    "jquery": "^3.6.4",
     "preline": "^1.7.0"
   }
 }

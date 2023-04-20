@@ -21,7 +21,10 @@
             <%= content_tag :td, class: 'calendar.td_classes_for(day) border' do %>
               <div style="overflow-x: scroll;">
                 <ul class="list-disc list-inside" style="white-space: nowrap;">
-                  <li><%= day.day %></li>
+                  <li>
+                    <% diary = current_user.kitchen_garden.diaries.find_by(created_at: day.beginning_of_day..day.end_of_day) %>
+                    <%= link_to "#{day.day}#{diary ? '📕' : ''}", diary ? mypage_diary_path(diary) : new_mypage_diary_path(date: day), class: 'diary-link' %>                    
+                  </li>
                   <% if day == Date.today %>
                     <li>Today</li>
                   <% end %>
