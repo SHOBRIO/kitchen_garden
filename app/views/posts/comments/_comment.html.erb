@@ -1,0 +1,18 @@
+<li id="<%= dom_id(comment) %>">
+  <div class="flex items-center">
+    <% if comment.user.profile.avatar.attached? %>
+      <div class="w-1/3 p-6">
+        <%= image_tag comment.user.profile.avatar, class: "rounded-full border p-1" %>
+      </div>
+    <% end %> 
+    <%= comment.content %>
+  </div>
+  <div >
+    <div class="text-gray-500 text-sm flex justify-end">
+      by <%= comment.user.profile.name %>
+      <%= comment.created_at.strftime('%Y年%m月%d日%H:%M') %>
+    </div>
+  </div>
+  <hr />
+  <br>
+</li>

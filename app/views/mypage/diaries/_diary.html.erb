@@ -1,0 +1,24 @@
+<% if diary.kitchen_garden == current_user.kitchen_garden %>
+  <div id="<%= dom_id diary %>">
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Title:</strong>
+      <%= diary.title %>
+    </p>
+
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Body:</strong>
+      <%= diary.body %>
+    </p>
+
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Created at:</strong>
+      <%= diary.created_at.strftime('%Y年%m月%d日') %>
+    </p>
+
+    <% if action_name != "show" %>
+      <%= link_to "Show this diary", mypage_diary_path(diary), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to 'Edit this diary', edit_mypage_diary_path(diary), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+      <hr class="mt-6">
+    <% end %>
+  </div>
+<% end %>

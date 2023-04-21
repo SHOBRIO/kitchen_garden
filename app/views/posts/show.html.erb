@@ -1,0 +1,47 @@
+<div class="container p-3">
+  <div class="card mb-3">
+    <div class="flex justify-between align-items-center mt-3">
+      <%= link_to '戻る', posts_path, class: 'btn btn-primary btn-sm' %>
+      <% if current_user&.mine?(@post) %>
+        <%= form_with url: post_path(@post), method: :delete, class: 'inline-block' do %>
+            <%= submit_tag '削除', class: 'btn btn-danger btn-sm' %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <hr />
+      <br>
+      <div class="flex items-center">
+        <% if @post.user.profile.avatar.attached? %>
+        <div class="w-1/3 p-6">
+          <%= image_tag @post.user.profile.avatar, class: "rounded-full border p-1" %>
+        </div>
+        <% end %> 
+        <h2 class="h2"><%= @post.content %></h2>
+      </div>
+      <div class="text-gray-500 text-sm flex justify-end">
+        by <%= @post.user.profile.name %>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div class="card-body">
+    <% if logged_in? %>
+      <%= form_with model: [@post, @comment] do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="mb-3">
+          <%= f.label :comment %>
+          <%= f.text_area :content, rows: 2, class: 'form-control w-full' %>
+        </div>
+        <div class="flex justify-end">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="p-5">
+      <ul class="list-unstyled">
+        <%= render partial: 'posts/comments/comment', collection: @post.comments.order(created_at: :desc) %>
+      </ul>
+    </div>
+  </div>
+</div>

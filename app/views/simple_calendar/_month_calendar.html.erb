@@ -1,0 +1,88 @@
+<div class="month-calendar-wrapper p-3">
+  <span class="flex justify-center items-center">
+    <p class="text-lg font-bold"><%= t('date.month_names')[start_date.month] %></p>
+    <p class="text-sm">/<%= start_date.year %></p>
+  </span>
+  <div class="flex justify-between mb-3">
+    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
+    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+  </div>
+
+  <div class="guide-block flex text-sm mb-3">
+    <div class="w-1/3 border-r p-1">
+      <div>
+        <p class="flex justify-center font-bold mb-1 bg-green-100">種まき</p>
+      </div>
+      <% @filtered_sowing.each do |planting| %>
+        <div class="flex justify-center">
+          <%= planting.vegetable.name %>
+        </div>
+      <% end %>
+    </div>
+    <div class="w-1/3 border-r p-1">
+      <div>
+        <p class="flex justify-center font-bold mb-1 bg-green-100">苗植え</p>
+      </div>
+      <% @filtered_planting.each do |planting| %>
+        <div class="flex justify-center">
+          <%= planting.vegetable.name %>
+        </div>
+      <% end %>
+    </div>
+    <div class="w-1/3 p-1">
+      <div>
+        <p class="flex justify-center font-bold mb-1 bg-green-100">収穫</p>
+      </div>
+      <% @filtered_harvesting.each do |planting| %>
+        <div class="flex justify-center">
+          <%= planting.vegetable.name %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table-fixed border-collapse mx-auto" style="table-layout: fixed; width: 100%;">
+    <thead>
+      <tr>
+        <% date_range.slice(0, 7).each do |day| %>
+          <th class="bg-gray-100 border"><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody style="height: 500px;">
+      <% date_range.each_slice(7) do |week| %>
+        <tr style="height: 100px; vertical-align: top;">
+          <% week.each do |day| %>
+            <%= content_tag :td, class: 'calendar.td_classes_for(day) border' do %>
+              <div style="overflow-x: scroll;">
+                <ul class="list-disc list-inside" style="white-space: nowrap;">
+                  <li>
+                    <% diary = @diaries.find { |d| d.created_at.to_date == day } %>
+                    <%= link_to "#{day.day}#{diary ? '📕' : ''}", diary ? mypage_diary_path(diary) : new_mypage_diary_path(date: day) %>
+                  </li>
+                  <% if day == Date.today %>
+                    <li>Today</li>
+                  <% end %>
+                  <% if @plantings.present? %>
+                    <% @plantings.each do |planting| %>
+                      <% if day == planting.sowing_date %>
+                        <li><%= planting.vegetable.name %>の種まきをした日</li>
+                      <% end %>
+                      <% if day == planting.germination_date %>
+                        <li><%= planting.vegetable.name %>の芽が出た日</li>
+                      <% end %>
+                      <% if day == planting.seedling_date %>
+                        <li><%= planting.vegetable.name %>の苗を植えた日</li>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

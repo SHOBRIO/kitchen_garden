@@ -1,0 +1,15 @@
+<li id="<%= dom_id(post) %>" class="p-3">
+  <div class="flex flex-col border p-3">
+    <div class="md:w-4/5">
+      <div class="flex justify-start">
+        <%= link_to post.content, post_path(post), class: 'text-gray-800 hover:text-gray-700 text-lg' %>
+      </div>
+      <div class="text-gray-500 text-sm flex justify-end">
+        posted by <%= post.user.profile.name %>
+      </div>
+    </div>
+    <div class="md:w-1/5 text-right text-gray-500 text-sm flex justify-end">
+      <%= post.created_at.strftime('%Y年%m月%d日%H:%M') %>
+    </div>
+  </div>
+</li>

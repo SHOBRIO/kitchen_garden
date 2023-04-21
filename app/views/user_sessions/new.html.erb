@@ -1,0 +1,31 @@
+<div class="container mx-auto my-auto">
+  <div class="hero-content flex-col">
+      <!-- Card -->
+      <div class="card shrink-0 w-full max-w-sm shadow-xl bg-base-100">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="text-center mb-4">
+            <h1 class="mb-1 fw-bold">Sign up</h1>
+            <span>登録がお済みでない方は
+              <%= link_to 'こちら', signup_path, class: 'bg-green-500 rounded-lg p-1 text-white' %>
+            </span>
+          </div>
+          <!-- Form -->
+          <%= form_with url: login_path do |f| %>
+            <div class="form-control my-2">
+              <%= f.label :email %>
+              <%= f.email_field :email, class: 'input input-bordered' %>
+            </div>
+            <div class="form-control my-2">
+              <%= f.label :password %>
+              <%= f.password_field :password, class: 'input input-bordered' %>
+            </div>
+            <div class="form-control p-4">
+              <%= f.submit 'ログイン', class: 'btn btn-primary gap-2 border-transparent
+              bg-green-500 hover:border-transparent hover:bg-green-500' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  </div>
+</div>

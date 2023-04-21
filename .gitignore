@@ -4,8 +4,17 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# カンヌーさんの講義 自走力の巻
+# https://esa-pages.io/p/sharing/2315/posts/21146/4f13d2d76aaa11d364b1.html
+/todo.rb
+
+/node_modules/*
 .memo
 .keep
+
+# Ignore DS_Store.
+.DS_Store
+
 #Docker volums.
 /db/mysql/volumes
 

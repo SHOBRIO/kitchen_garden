@@ -1,0 +1,7 @@
+<div class="flash-message bg-green-100">
+  <% flash.each do |message_type, message| %>
+    <span class="flex justify-center p-3">
+      <%= message %>
+    </span>
+  <% end %>
+</div>

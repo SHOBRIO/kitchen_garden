@@ -12,4 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require application.tailwind
+ *= require simple_calendar
+
  */
