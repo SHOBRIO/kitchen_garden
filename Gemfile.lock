@@ -306,6 +306,7 @@ DEPENDENCIES
   capybara
   debug
   fullcalendar-rails
+  i18n
   importmap-rails
   jbuilder
   momentjs-rails

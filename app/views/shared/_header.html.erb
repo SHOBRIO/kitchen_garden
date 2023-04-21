@@ -26,12 +26,12 @@
     
     <div class="ml-auto w-1/3 inline-flex justify-center items-center">
       <% if logged_in? %>
-        <%= link_to mypage_kitchen_garden_path(current_user), class: "border-2 px-5 py-2 rounded-lg bg-green-500 text-white text-center text-sm font-bold" do %>
-          🥬 うちのお野菜 🍅
+        <%= link_to mypage_kitchen_garden_path(current_user, start_date: Date.today), class: "border-2 px-5 py-2 rounded-lg bg-green-500 text-white text-center text-sm font-bold" do %>
+        <p>🥬 うちのお野菜 🍅</p>
         <% end %>
       <% else %>
         <%= link_to root_path, class: "border-2 px-5 py-2 rounded-lg bg-green-500 text-white text-center text-sm font-bold" do %>
-          🥬 うちのお野菜 🍅
+        <p>🥬 うちのお野菜 🍅</p>
         <% end %>
       <% end %>
     </div>

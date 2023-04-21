@@ -58,6 +58,9 @@ gem 'oauth'
 gem 'oauth2'
 gem 'sorcery'
 
+#日本語化
+gem 'i18n'
+
 #カレンダーはこっちを使う
 gem 'simple_calendar'
 
