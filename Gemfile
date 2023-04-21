@@ -60,6 +60,7 @@ gem 'sorcery'
 
 #日本語化
 gem 'i18n'
+gem 'rails_admin-i18n'
 
 #カレンダーはこっちを使う
 gem 'simple_calendar'

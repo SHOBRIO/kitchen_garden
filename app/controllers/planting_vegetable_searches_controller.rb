@@ -1,6 +1,9 @@
 class PlantingVegetableSearchesController < ApplicationController
   def index
-    @vegetables = Vegetable.all
+    @vegetables = Vegetable.all.order(:id)
+    @small_vegetables = @vegetables.where(size: KitchenGarden::SIZES[:small])
+    @medium_vegetables = @vegetables.where(size: KitchenGarden::SIZES[:medium])
+    @large_vegetables = @vegetables.where(size: KitchenGarden::SIZES[:large])
   end
   
   def show
